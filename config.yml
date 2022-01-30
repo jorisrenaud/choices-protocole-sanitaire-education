@@ -1,33 +1,35 @@
 # Default locale for UI strings
-locale: "en"
+locale: "fr"
 
 # Customize UI strings
 ui-strings:
-  # display-help:         "Display help"
-  # copy-to-clipboard:    "Copy in the clipboard"
-  # mail-to-message:      "Send by email"
-  # mail-subject:         "Results"
-  # mail-body:            "Hi,\n%s\nThanks."
-  # redo:                 "Redo"
-  # ok:                   "Okay"
+  # display-help:         "Afficher de l'aide"
+  # copy-to-clipboard:    "Copier dans le presse-papier"
+  # mail-to-message:      "Envoyé par email"
+  # mail-subject:         "Résultats"
+  # mail-body:            "Bonjour,\n%s\nMerci."
+  # redo:                 "Recommencer"
+  # ok:                   "D'accord"
   # contact-intro:        "Contact: "
-  # toggle-summary-style: "Toggle summary style"
+  # toggle-summary-style: "Changer le style de résumé"
   # attention:            "Attention"
 
 # Website header
 header:
- title:    "Here is my title."
- logo:     ""
- color:    "is-primary"
- subtitle: "A subtitle here, possibly with _markdown_ formatting."
+ title:    "Protocole École"
+ logo:     "/img/logo-round-blue.png"
+ color:    "is-info"
+ subtitle: "Mon enfant est cas contact ou positif à la COVID-19, que faire ?"
 
 # Website footer
 footer:
- text:    "Some text here, possibly with **markdown** formatting."
- contact:  ""
+ text:    "Le site à été mis à jour le 16 janvier 2022 sur la base du protocole entré en vigueur le 14 janvier 2022.  
+ Ce site a été conçu par l’association citoyenne de crise Faire École Ensemble avec le soutien d’un enseignant, d’une proviseurs et d’une directrice générale adjointe des services d’une commune sur la base du protocole sanitaire officiel disponible sur [https://education.gouv.fr/info-coronavirus](https://education.gouv.fr/info-coronavirus).\
+Le code source provient du travail d'[Etalab](https://www.etalab.gouv.fr/) et est disponible du site [ici](https://github.com/bzg/choices-protocole-sanitaire-education)."
+ contact:  "contact@protocole-ecole.fr"
 
 # Allow users to send you emails with the summary?
-mail-to:
+mail-to: "contact@protocole-ecole.fr"
 
 # Display help along with questions by default?
 display-help: true
@@ -36,20 +38,20 @@ display-help: true
 display-summary: true
 
 # Display score information?
-display-score: true
+display-score: false
 
 # Display each score?
-display-score-details: true
+display-score-details: false
 
 # Only the score with the highest value?
-display-score-top-result: true
+display-score-top-result: false
 
 # In a branch of the tree, should the target node be set depending on
 # the updated value of conditional-score-outputs?
-conditional-navigation: false
+conditional-navigation: true
 
 # Some text message to always display after the score results
-display-unconditionnally: ""
+display-unconditionnally: "Ceci est un site d'information. La véracité des informations peut être remis en cause suite à d'éventuels changements dans le protocole. Nous tentons de maintenir à jour les informations dès que nous les avons en notre possession."
 
 # Set initial variables to register scores.  Each entry of
 # score-variables start with the name of the variable (you can pick
@@ -94,64 +96,164 @@ conditional-score-outputs:
 # Mandatory configuration option
 tree:
   - node:       "0"
-    text:       "A title for the default page"
+    text:       "Présentation du guide"
     home-page:  true
     force-help: true
     no-summary: true
-    help:       "Some introductory text here."
+    help:       "Ce site propose un questionnaire qui vous permettra en quelques secondes d’accéder à une information personnalisée quant à la démarche à suivre si votre enfant est cas contact ou positif à la COVID-19.<br><br>En maternelle et en élémentaire, un élève est considéré comme contact si un élève de sa classe est malade de COVID-19 ou s’il a eu un contact à risque.<br><br>Au collège et au lycée, un élève est considéré comme contact uniquement s’il a eu un contact à risque.<br><br>La notion de contact à risque caractérise un élève en contact direct et prolongé avec un camarade positif à la COVID-19 sans respect des gestes barrière et notamment port du masque (par exemple : déjeuner à la cantine).<br><br>Les élèves identifiés comme cas contact suite à l’apparition d’un cas confirmé peuvent poursuivre la journée ou la demi-journée de classe dans l’attente que leurs responsables légaux puissent venir les chercher aux heures habituelles de fin des cours."
     choices:
-    - answer: "Start now"
+    - answer: "Commencer maintenant"
       goto:   "1"
       color:  "is-info"
 
   - node:       "1"
-    progress: "[1 2]"  # progress bar
-    text:       "Is it the first question?"
-    help:       "Some **help text** here for the first question.  Markdown formatting accepted."
+    text:       "Votre enfant est-il positif à la COVID-19 ou a-t-il été en contact avec un élève malade de la covid-19 ?"
     start-page: true
     choices:
-    - answer:  "Yes"
-      summary: "Yes, this is the first question."
-      explain: "Some explanation here."
-      score:
-        score-1:
-          value: 1
+    - answer:  "Mon enfant est positif ou a  à la COVID-19"
+      summary: "Mon enfant est positif à la COVID-19"
       goto:    "2"
       color:   "is-info"
-    - answer:  "No"
-      summary: "No, this is not the first question."
+    - answer:  "Mon enfant est négatif à la COVID-19 ni cas contact."
+      summary: "Mon enfant est négatif à la COVID-19 et n'est pas cas contact"
       color:   "is-warning"
-      goto:    "end"
+      goto:    "fin-1"
 
   - node:    "2"
-    text:    "Is it the second question?"
-    help:    "Some help text here for the second question."
+    text:    "Votre enfant a-t-il 12 ans ou plus ?"
     choices:
-    - answer:  "Yes"
-      summary: "Yes, this is the second question!"
-      score:
-        score-2:
-          value: 10
+    - answer:  "Oui"
+      summary: "Oui, mon enfant a 12 ans ou plus."
       goto:    "3"
       color:   "is-info"
-    - answer:  "No"
-      summary: "No, this is not the second question."
+    - answer:  "Non"
+      summary: "Non, mon enfant a moins de 12 ans."
       color:   "is-warning"
-      goto:    "end"
+      goto:    "fin-2"
 
   - node:    "3"
-    text:    "Is it the _third_ question?"
-    help:    "Some help text here for the second question."
+    text:    "Votre enfant est-il entièrement vacciné ?"
     choices:
-      - answer:  "Yes"
-        summary: ["Yes, this is the third question...", "This will end soon, I promise."]
-        goto: "end"
+      - answer:  "Oui"
+        goto: "fin-3"
         color: "is-info"
-      - answer:  "No"
-        summary: "No, this is not the third question."
+      - answer:  "Non"
+        summary: "Non, mon enfant a reçu 2 doses ou moins de vaccins contre la COVID-19"
         color: "is-warning"
-        goto: "end"
+        goto: "fin-4"
 
-  - node: "end"
-    text: "This is the end."
+  - node: "4"
+    text: "Votre enfant est-il en maternelle, élémentaire, collège ou lycée ?"
+    choices: 
+      - answer: "Maternelle"
+        summary: "Mon enfant est en maternelle."
+        goto: "5"
+        color: "is-info"
+      - answer: "Élémentaire"
+        summary: "Mon enfant est en élémentaire."
+        goto: "5"
+        color: "is-info"
+      - answer: "Collège"
+        summary: "Mon enfant est au collège."
+        goto: "8"
+        color: "is-info"
+      - answer: "Lycée"
+        summary: "Mon enfant est au lycée"
+        goto: "8"
+        color: "is-info"
+  
+  - node: "5"
+    text: "Votre enfant a-t-il été infecté par la COVID-19 il y a moins de 2 mois ?"
+    choices:
+      - answer: "moins de 2 mois"
+        summary: "Mon enfant a eu la COVID-19 il y a moins de 2 mois."
+        goto: "fin-5"
+        color: "is-info"
+      - answer: "plus de deux mois"
+        summary: "Mon enfant n'a jamais eu la COVID-19 ou a été infecté il y a plus de 2 mois."
+        goto: "6"
+        color: "is-warning"
+
+  - node: "6"
+    text: "Votre enfant a-t-il réalisé un autotest (ou antigénique ou PCR) depuis le signalement du contact avec un élève malade de la COVID-19 ?"
+    choices:
+      - answer: "Oui"
+        summary: "Mon enfant a fait un autotest (ou antigénique ou PCR)."
+        goto: "7"
+        color: "is-info"
+      - answer: "Non"
+        summary: "Mon enfant n'a pas fait d'autotest."
+        goto: "fin-6"
+        color: "is-warning"
+
+  - node: "7"
+    text: "Votre enfant a-t-il été testé positif à la COVID-19 ?"
+    choices:
+      - answer: "Oui"
+        summary: "Mon enfant a été testé positif."
+        goto: "fin-7"
+        color: "is-info"
+      - answer: "Non"
+        summary: "Mon enfant a été testé négatif."
+        goto: "fin-8"
+        color: "is-warning"
+    
+  - node: "8"
+    text: "Votre enfant a-t-il 12 ans ou plus ?"
+    choices: 
+      - answer: "Mon enfant a moins de 12 ans"
+        summary: "Mon enfant a moins de 12 ans."
+        color: "is-info"
+        goto: "5"
+      - answer: "Mon enfant a 12 ans ou plus"
+        summary: "Mon enfant a 12 ans ou plus"
+        color: "is-warning"
+        goto: "9"
+
+  - node: "9"
+    text: "Votre enfant est-il entièrement vacciné contre la COVID-19 ?"
+    choices:
+      - answer: "Entièrement vaccinée"
+        summary: "Mon enfant est entièrement vacciné"
+        color: "is-info"
+        goto: "5"
+      - answer: "Partiellement ou non vacciné"
+        summary: "Mon enfant est partiellement ou non vacciné."
+        color: "is-warning"
+        goto: "fin-9"
+
+  - node: "fin-1"
+    text: "Votre enfant peut retourner à l'école."
+    done: true
+
+  - node: "fin-2"
+    text: "Quel que soit le statut vaccinal de votre enfant : Isolement de 5 jours. Test PCR ou antigénique au bout de 5 jours. Si le test est encore positif, poursuite de l'isolement jusqu'à 7ème jour. Si le test est encore positif après 7 jours, votre enfant peut reprendre l’école s’il n’a plus de symptômes. S’il a encore des symptômes, vous pouvez demander un arrêt maladie à son médecin traitant.. Si le test est négatif et en l’absence de symptômes depuis 48 heures, votre enfant peut retourner en classe."
+    done: true
+
+  - node: "fin-3"
+    text: "* Isolement de 5 jours. Test antigénique ou PCR au bout de 5 jours.. Si le test est encore positif, poursuite de l’Isolement jusqu’au 7ème jour. Si le test est encore positif après 10 jours, votre enfant peut reprendre l’école s’il n’a plus de symptômes. S’il a encore des symptômes, vous pouvez demander un arrêt maladie à son médecin traitant. Si le test est négatif et en l’absence de symptômes depuis 48 heures, votre enfant peut retourner en classe."
+    done: true
+
+  - node: "fin-4"
+    text: "Isolement de 7 jours. Test PCR ou antigénique au bout de 7 jours. Si le test est négatif et en l’absence de symptômes depuis 48 heures, votre enfant peut retourner en classe. Si le test est encore positif, poursuite de l'isolement jusqu'à 10ème jour. Si le test est encore positif après 10 jours, votre enfant peut reprendre l’école s’il n’a plus de symptômes. S’il a encore des symptômes, vous pouvez demander un arrêt maladie à son médecin traitant."
+    done: true
+
+  - node: "fin-5"
+    text: "Votre enfant peut poursuivre les cours en présentiel sans réaliser de test, sauf si des symptômes apparaissent."
+    done: true
+
+  - node: "fin-6"
+    text: "Réalisez un autotest (ou antigénique ou PCR) immédiatement. Les représentants légaux se voient remettre les autotests gratuitement en pharmacie sur présentation du courrier remis par l’école. En l’absence de test : isolement de 7 jours de votre enfant avant un retour en classe."
+    done: true
+
+  - node: "fin-7"
+    text: "Faites confirmer par un test antigénique ou PCR Si le test positif est confirmé, quel que soit le statut vaccinal de votre enfant : Isolement de 5 jours. Test PCR ou antigénique au bout de 5 jours. Si le test est encore positif, poursuite de l'isolement jusqu'à 7ème jour. Si le test est encore positif après 7 jours, votre enfant peut reprendre l’école s’il n’a plus de symptômes. S’il a encore des symptômes, vous pouvez demander un arrêt maladie à son médecin traitant. Si le test est négatif et en l’absence de symptômes depuis 48 heures, votre enfant peut retourner en classe"
+    done: true
+
+  - node: "fin-8"
+    text: "Pas d’isolement, Poursuite des cours en présentiel, Deux autotests (ou antigénique ou PCR) à J+2 et J+4 après le premier test, Déclaration sur l’honneur (voir modèle [ici](https://www.education.gouv.fr/media/97816/download)) à fournir à l’école par les représentants légaux attestant du résultat négatif du premier autotest et de l’engagement à réaliser des autotests à J+2 et J+4."
+    done: true
+
+  - node: "fin-9"
+    text: "Isolement de 7 jours, Réalisation d’un test PCR ou antigénique le 7e jour de l’isolement, Si le test est négatif, attestation sur l’honneur (voir modèle [ici](https://www.education.gouv.fr/media/97816/download)) avant le retour en classe, Si le test est positif, Isolement de 7 jours, Test PCR ou antigénique au bout de 7 jours, Si le test est encore positif, poursuite de l'isolement jusqu'à 10ème jour. Si le test est encore positif après 10 jours, votre enfant peut reprendre l’école s’il n’a plus de symptômes. S’il a encore des symptômes, vous pouvez demander un arrêt maladie à son médecin traitant. Si le test est négatif et en l’absence de symptômes depuis 48 heures, votre enfant peut retourner en classe."
     done: true
